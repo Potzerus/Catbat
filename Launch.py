@@ -36,11 +36,13 @@ async def on_raw_reaction_add(payload):
                 batted.append(reaction.message.id)
                 embed = discord.Embed()
                 if len(message.content) != 0:
-                    embed.set_author(name="%s" % message.content)
+                    embed.add_field(name="Content", value="%s" % message.content)
                 if len(message.attachments) != 0:
                     embed.set_image(url=message.attachments[0].url)
                 embed.add_field(name="Jump to message", value=message.jump_url, inline=False)
-                embed.set_footer(text="%s#%s in #%s" % (message.author.name, message.author.discriminator, message.channel.name),icon_url=message.author.avatar_url)
+                embed.set_footer(
+                    text="%s#%s in #%s" % (message.author.name, message.author.discriminator, message.channel.name),
+                    icon_url=message.author.avatar_url)
                 await channel.send(embed=embed)
                 return
 
